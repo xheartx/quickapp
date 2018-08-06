@@ -1,0 +1,52 @@
+<template>
+<div class="u-w-view u-w-root">
+  <div class="u-w-view wrapper" if="{{selectedId === '1'}}">
+    <div class="u-w-view column">
+      <text class="u-w-text title">公司简介</text>
+      <image class="u-w-image" src="{{baseUrl}}/static/images/about_compony.png" style="resize-mode:cover"></image>
+      <text class="u-w-text paragraph">。公司总部位于杭州市西湖区公元里，法人代表顾卫俊。
+        <text class="u-w-text red">“新华网·互联网经济”战略合作伙伴</text>
+      </text>
+      <text class="u-w-text paragraph">新华金典致力于提供优质多元的理财产品和个性定制化的金融服务，以配套更契合用户需求的财富管理、增值方案为核心竞争力。新华金典不仅是客户在个人财富管理方面的优秀合作伙伴，而且还是社会营造诚信健康金融环境，助推普惠金融发展的重要帮手。</text>
+      <text class="u-w-text paragraph">新华金典的核心运营团队成员均为拥有多年银行从业经验、精通互联网金融的行业精英；在社会各界的助力下，通过建立一站式投资理财服务，正逐渐成为以“安全、专业、高效”为行业标识的全国知名品牌。</text>
+    </div>
+    <div class="u-w-view column">
+      <text class="u-w-text title">总裁寄语</text>
+      <image class="u-w-image" src="{{baseUrl}}/static/images/about_hope.png" style="resize-mode:cover"></image>
+      <text class="u-w-text paragraph">新华金典作为一名普惠金融的践行者，我们坚信普惠的社会价值，希望在投资方与融资方之间搭建起一座信息的桥梁，让社会资本可以安全、准确、高效地与市场需求对接。</text>
+      <text class="u-w-text paragraph">我们将以实现百年基业为战略目标，致力于成为新时代的造福者，让新华金典成为一个值得信赖、极具市场竞争力的财富管理平台。</text>
+      <div class="u-w-view ceo-sign">
+        <text class="u-w-text">———— 总裁：</text>
+        <image class="u-w-image sign" src="{{baseUrl}}/static/images/signature.png" style="resize-mode:cover"></image>
+      </div>
+    </div>
+    <div class="u-w-view column">
+      <text class="u-w-text title">高管介绍</text>
+      <image data-url="{{baseUrl}}/static/images/about_header_1.png" data-id="companyProfile" class="u-w-image" src="{{baseUrl}}/static/images/about_header_1.png" style="resize-mode:cover" onclick="$handlePageEvent('previewImage',false,false)"></image>
+      <image data-url="{{baseUrl}}/static/images/about_header_3.png" data-id="companyProfile" class="u-w-image" src="{{baseUrl}}/static/images/about_header_3.png" style="resize-mode:cover" onclick="$handlePageEvent('previewImage',false,false)"></image>
+      <image data-url="{{baseUrl}}/static/images/about_header_2.png" data-id="companyProfile" class="u-w-image" src="{{baseUrl}}/static/images/about_header_2.png" style="resize-mode:cover" onclick="$handlePageEvent('previewImage',false,false)"></image>
+    </div>
+    <div class="u-w-view column">
+      <text class="u-w-text title">企业愿景</text>
+      <image class="u-w-image" src="{{baseUrl}}/static/images/about_leader.png" style="resize-mode:cover"></image>
+      <text class="u-w-text paragraph">“十年树木，百年树人”，为打造金融行业百年品牌，新华金典始终以新华网、人民日报这两大中国权威媒体为榜样，砥砺前行。立互联网金融潮头，做新时代行业标杆，新华金典志在打造一款具有高品牌辨识度、高用户认同感的智能化创新金融产品，为普惠金融事业发展作出贡献。</text>
+    </div>
+  </div>
+</div>
+</template>
+<style>
+@import '../../../polyfill.css';
+@import '../../../app.css';
+</style>
+<script>
+  export default {
+    props: ['data'],
+    onInit() {
+      
+      this.$handleRouterEvent = _$$handleRouterEvent$$_($app_require$)
+      
+      this.data&&Object.keys(this.data).forEach(key => this.$set(key, this.data[key]))
+    }
+  }
+</script>
+  

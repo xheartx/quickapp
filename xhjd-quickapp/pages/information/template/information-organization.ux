@@ -1,0 +1,31 @@
+<template>
+<div class="u-w-view u-w-root">
+  <div class="u-w-view wrapper information-organization" if="{{selectedId === '3'}}">
+    <div class="u-w-view column">
+      <text class="u-w-text title">组织架构</text>
+      <text class="u-w-text paragraph">新华金典运营团队采取精英化管理、选拔模式，核心高管团队成员均拥有丰富银行、金融领域的从业经验，同时精通互联网金融产业。随着公司的招贤纳士，越来越多的行业佼佼者加入新华金典，其中不乏曾就职于美国摩根大通、英国巴克莱、瑞士信贷等世界知名银行的精英团队成员。</text>
+      <image data-url="{{baseUrl}}/static/images/jiagou.png" data-id="organization" class="u-w-image" src="{{baseUrl}}/static/images/jiagou.png" style="resize-mode:cover" onclick="$handlePageEvent('previewImage',false,false)"></image>
+    </div>
+    <div class="u-w-view column">
+      <text class="u-w-text title">从业人员</text>
+      <image data-url="{{baseUrl}}/static/images/scale-spread.png" data-id="organization" class="u-w-image" src="{{baseUrl}}/static/images/scale-spread.png" style="resize-mode:cover" onclick="$handlePageEvent('previewImage',false,false)"></image>
+    </div>
+  </div>
+</div>
+</template>
+<style>
+@import '../../../polyfill.css';
+@import '../../../app.css';
+</style>
+<script>
+  export default {
+    props: ['data'],
+    onInit() {
+      
+      this.$handleRouterEvent = _$$handleRouterEvent$$_($app_require$)
+      
+      this.data&&Object.keys(this.data).forEach(key => this.$set(key, this.data[key]))
+    }
+  }
+</script>
+  

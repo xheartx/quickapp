@@ -1,0 +1,19 @@
+
+<template>
+
+</template>
+<style>
+@import '../../../../polyfill.css';
+@import '../../../../app.css';
+
+
+</style>
+<script>
+
+const _$wxs$_ = {
+
+}
+
+
+</script>
+  

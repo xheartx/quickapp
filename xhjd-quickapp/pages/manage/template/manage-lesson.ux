@@ -1,0 +1,28 @@
+<template>
+<div class="u-w-view u-w-root">
+  <div class="u-w-view wrapper manage-lesson" if="{{selectedId === '2'}}">
+    <div class="u-w-view title-wrapper">
+      <div class="u-w-view title">
+        <text class="u-w-text">金典理财小课堂</text>
+      </div>
+    </div>
+    <import-card is="card" data="{{ list: lesson.list }}"></import-card>
+  </div>
+</div>
+</template>
+<style>
+@import '../../../polyfill.css';
+@import '../../../app.css';
+</style>
+<script>
+  export default {
+    props: ['data'],
+    onInit() {
+      
+      this.$handleRouterEvent = _$$handleRouterEvent$$_($app_require$)
+      
+      this.data&&Object.keys(this.data).forEach(key => this.$set(key, this.data[key]))
+    }
+  }
+</script>
+  

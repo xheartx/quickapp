@@ -1,0 +1,58 @@
+
+<template>
+<div class="u-w-view u-w-root">
+  <div class="u-w-view lesson-detail">
+    <richtext class="u-w-rich-text rich-text" type="html">{{$handleRichText(nodes)}}</richtext>
+  </div>
+</div>
+</template>
+<style>
+@import '../../polyfill.css';
+@import '../../app.css';
+
+.lesson-detail {
+  background-color: #fff;
+  line-height: 1.5;
+  font-size: 0;
+}
+
+.rich-image {
+  width: 100% !important;
+  margin: 0;
+  display: flex;
+  /*height:auto; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+</style>
+<script>
+
+const _$wxs$_ = {
+
+}
+
+// pages/lesson-detail.js
+import { getDetail } from '../../api/detail.js';
+
+Page({
+  data: {
+    nodes: ''
+  },
+  onLoad: function (options) {
+    var that = this;
+    getDetail(options.url).then(res => {
+      var article = /<body>([\s\S]*?)<\/body>/gi.exec(res)[1];
+      var url = options.url.substr(0, options.url.lastIndexOf("/") + 1);
+      article = article.replace(/src="/g, 'class="rich-image" src="' + url);
+      that.setData({
+        nodes: article
+      });
+    });
+  }
+}, {
+  path: 'pages/lesson-detail/lesson-detail',
+  module: module,
+  exports: exports,
+  $app_require$: $app_require$,
+  wxs: typeof _$wxs$_ === 'undefined' ? {} : _$wxs$_
+});
+</script>
+  

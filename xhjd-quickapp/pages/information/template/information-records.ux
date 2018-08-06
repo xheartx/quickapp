@@ -1,0 +1,27 @@
+<template>
+<div class="u-w-view u-w-root">
+  <div class="u-w-view wrapper information-records" if="{{selectedId === '5'}}">
+    <div class="u-w-view column">
+      <text class="u-w-text title">备案信息</text>
+      <!--uniapp comment: unsupported component.[兼容写法参考](http://ask.dcloud.net.cn/article/13169)
+<table list="{{ records.list }}" align="{{ records.align }}" width="{{ records.width }}"></table>-->
+    </div>
+  </div>
+</div>
+</template>
+<style>
+@import '../../../polyfill.css';
+@import '../../../app.css';
+</style>
+<script>
+  export default {
+    props: ['data'],
+    onInit() {
+      
+      this.$handleRouterEvent = _$$handleRouterEvent$$_($app_require$)
+      
+      this.data&&Object.keys(this.data).forEach(key => this.$set(key, this.data[key]))
+    }
+  }
+</script>
+  

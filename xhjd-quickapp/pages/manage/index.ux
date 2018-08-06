@@ -1,0 +1,538 @@
+<import name="import-manage-product" src="./template/manage-product.ux"></import>
+<import name="import-manage-lesson" src="./template/manage-lesson.ux"></import>
+<import name="modal" src="/components/modal/index.ux"></import>
+<import name="tab" src="/components/tab/index.ux"></import>
+<template>
+<div class="u-w-view u-w-root">
+  <div class="u-w-view u-w-tabs">
+    <div class="u-w-view container manage">
+      <tab list="{{list}}" selectedid="{{selectedId}}" scroll="{{false}}" bind:tabchange="tabChange"></tab>
+      <div class="u-w-view top-bg">
+        <text class="u-w-text">做您身边安全、稳健的互联网财富管理管家</text>
+      </div>
+      <import-manage-product is="manage-product" data="{{ baseUrl, selectedId, productList }}"></import-manage-product>
+      <import-manage-lesson is="manage-lesson" data="{{ baseUrl, selectedId, lesson }}"></import-manage-lesson>
+    </div>
+    <div class="u-w-view u-w-tabbar-placeholder">
+      <div class="u-w-view u-w-tabbar u-w-tabbar-bottom" style="border-top-color:black;background-color:#ffffff">
+        <div class="u-w-view u-w-tabbar-item" onclick="$handleRouterEvent('switchTab')" data-url="pages/index/index">
+          <image class="u-w-tabbar-icon" src="/images/tabBar/homepage.png"></image>
+          <text class="u-w-tabbar-text" style="color:#aaaaaa">首页</text>
+        </div>
+        <div class="u-w-view u-w-tabbar-item" onclick="$handleRouterEvent('switchTab')" data-url="pages/manage/manage">
+          <image class="u-w-tabbar-icon" src="/images/tabBar/coupons_fill.png"></image>
+          <text class="u-w-tabbar-text" style="color:#FF674C">理财</text>
+        </div>
+        <div class="u-w-view u-w-tabbar-item" onclick="$handleRouterEvent('switchTab')" data-url="pages/aboutus/aboutus">
+          <image class="u-w-tabbar-icon" src="/images/tabBar/group.png"></image>
+          <text class="u-w-tabbar-text" style="color:#aaaaaa">关于我们</text>
+        </div>
+        <div class="u-w-view u-w-tabbar-item" onclick="$handleRouterEvent('switchTab')" data-url="pages/information/information">
+          <image class="u-w-tabbar-icon" src="/images/tabBar/barrage.png"></image>
+          <text class="u-w-tabbar-text" style="color:#aaaaaa">信息披露</text>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+<style>
+@import '../../polyfill.css';
+@import '../../app.css';
+
+@import '/common/css/layout.css';
+
+@import '/templates/card/card.css';
+
+.top-bg {
+  background-image: url('http://www.xinhuajindian.com/xhjd-web/static/images/financing_header.png');
+}
+
+.title-wrapper {
+  color: #333;
+  margin: 40px 20px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.title text {
+  font-size: 35px;
+  margin: 0 10px;
+}
+
+/*
+uniapp comment: unsupported selector.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)
+.title::before {
+  width: 100rpx;
+  height: 1px;
+  background-color: #ddd;
+  vertical-align: middle;
+  display: inline-block;
+  content: '';
+}
+*/
+
+/*
+uniapp comment: unsupported selector.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)
+.title::after {
+  width: 100rpx;
+  height: 1px;
+  background-color: #ddd;
+  vertical-align: middle;
+  display: inline-block;
+  content: '';
+}
+*/
+
+.sub-title {
+  font-size: 20px;
+  color: #666;
+  text-align: center;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-welfare {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 40px;
+}
+
+.welfare-item {
+  flex: 1;
+  color: #fff;
+  text-align: center;
+  background-size: 100% 100%;
+  padding: 30px 0;
+  margin-bottom: 30px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  /*border-radius:20px; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+  /*background-position:center; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+/*
+uniapp comment: unsupported selector.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)
+.welfare-item:first-child {
+  margin-right: 10rpx;
+  background-image: url('http://www.xinhuajindian.com/xhjd-web/static/images/red-bg.png');
+}
+*/
+
+/*
+uniapp comment: unsupported selector.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)
+.welfare-item:last-child {
+  margin-left: 10rpx;
+  background-image: url('http://www.xinhuajindian.com/xhjd-web/static/images/green-bg.png');
+}
+*/
+
+.welfare-title {
+  font-size: 35px;
+  margin-bottom: 15px;
+}
+
+.welfare-item .line {
+  height: 1px;
+  width: 60%;
+  background-color: #fff;
+  margin-bottom: 20px;
+  /*margin:0 auto; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+.welfare-item .number {
+  font-size: 80px;
+  margin: 20px 0 10px;
+}
+
+.welfare-item .explain {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.welfare-item .des {
+  font-size: 30px;
+}
+
+.welfare-item .qr-image {
+  width: 45%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border-radius: 10px;
+  background-color: #fff;
+  flex-direction: row;
+  /*margin:0 auto; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+  /*position:relative; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+  /*border-radius:10px; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+  /*border-top-right-radius:0; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+  /*background:#fff; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+.welfare-item .qr-image image {
+  width: 100%;
+  display: flex;
+  /*height:auto; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+.welfare-item .qr-image .right {
+  top: 0;
+  right: 0;
+  background-color: rgba(255,255,255,.5);
+  font-size: 20px;
+  padding: 10px 12px;
+  border-radius: 0 0 20px;
+  /*position:absolute; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+  /*transform:translateX(100%); uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+  /*border-radius:0 0 20px; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+.product-list {
+  margin: 40px 0;
+}
+
+.product-list .product-item {
+  border: 2px solid #eee;
+  margin-bottom: 20px;
+}
+
+/*
+uniapp comment: unsupported selector.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)
+.product-list .product-item:last-child {
+  margin-bottom: 0;
+}
+*/
+
+.product-list .product-item .header {
+  height: 80px;
+  padding: 0 40px;
+  background-color: #f7f7f7;
+  display: flex;
+  align-items: center;
+  border-bottom-width: 2px;
+  border-style: solid;
+  border-bottom-color: #e1e2e3;
+  flex-direction: row;
+  /*border-bottom:2px solid #e1e2e3; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+.product-list .product-item .header span {
+  font-size: 40px;
+  color: #454545;
+}
+
+.product-list .product-item .header .embellish {
+  height: 60px;
+  line-height: 56px;
+  color: #fff;
+  font-size: 20px;
+  padding: 0 20px 0 30px;
+  margin: 2px 0 0 12px;
+  background-image: url('http://www.xinhuajindian.com/xhjd-web/static/images/Combined_Shape.png');
+  background-size: 100% 100%;
+  border-radius: 10px;
+  /*border-radius:10px; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+  /*background-repeat:no-repeat; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+.product-list .product-item .content {
+  padding: 50px 0 0 0;
+  margin: 0;
+  /*overflow:hidden; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+.product-list .product-item .content .data-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.product-list .product-item .data-item {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  /*position:relative; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+/*
+uniapp comment: unsupported selector.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)
+.product-list .product-item .data-item::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 20%;
+  bottom: 20%;
+  width: 1px;
+  background-color: #e1e2e3;
+}
+*/
+
+/*
+uniapp comment: unsupported selector.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)
+.product-list .product-item .data-item:last-child::after {
+  display: none;
+}
+*/
+
+.product-list .product-item .data-item .description {
+  font-size: 25px;
+  color: #666666;
+}
+
+.product-list .product-item .data-item .num {
+  font-size: 40px;
+  color: #666;
+}
+
+.product-list .product-item .data-item .num>span {
+  font-size: 20px;
+  margin-left: 6px;
+}
+
+/*
+uniapp comment: unsupported selector.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)
+.product-list .product-item .data-item:first-child .num {
+  font-size: 50rpx;
+  color: #F76E62;
+}
+*/
+
+.product-list .product-item .invest-btn {
+  width: 240px;
+  height: 68px;
+  line-height: 68px;
+  text-align: center;
+  font-size: 28px;
+  color: #F76E62;
+  border: 2px solid #F76E62;
+  align-items: center;
+  justify-content: center;
+  border-radius: 60px;
+  /*border-radius:60px; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+  /*margin:40px auto; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+.product-list .product-item .invest-btn:hover {
+  background-color: #F76E62;
+  color: #fff;
+}
+
+.null-product {
+  font-size: 30px;
+  color: #999;
+  text-align: center;
+  margin: 100px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-wrapper {
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  /*position:relative; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+  /*overflow:hidden; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+.step-item {
+  flex: 1;
+  margin: 40px 0 10px 0;
+}
+
+.step-item .num {
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  background-image: linear-gradient(-180deg, #FAFAFA 0%, #F2F2F2 100%);
+  border: 2px solid #E1E1E1;
+  font-size: 35px;
+  color: #454545;
+  text-align: center;
+  border-radius: 60px;
+  align-items: center;
+  justify-content: center;
+  /*border-radius:60px; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+  /*margin:0 auto; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+.step-item .text {
+  font-size: 38px;
+  color: #454545;
+  text-align: center;
+  margin: 20px 0 30px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-item .img {
+  padding: 20px;
+  width: 50%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  /*margin:0 auto; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+.step-item .img image {
+  width: 100%;
+  display: flex;
+  /*height:auto; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+.step-item .des {
+  font-size: 30px;
+  color: #666666;
+  margin-top: 20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-image {
+  /*position:relative; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+.modal-close {
+  right: 50px;
+  top: 8px;
+  font-size: 60px;
+  color: #fff;
+  opacity: 0.8;
+  /*position:absolute; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+  /*cursor:pointer; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+  /*transition:opacity 0.5s; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+.modal-image image {
+  width: 100%;
+  display: flex;
+  /*height:auto; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+</style>
+<script>
+
+const _$wxs$_ = {
+
+}
+
+const baseUrl = require('../../config').baseUrl;
+import { getManageList, getLessonList } from '../../api/manage.js';
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    baseUrl,
+    list: [{
+      id: '1',
+      title: '我要理财'
+    }, {
+      id: '2',
+      title: '理财小课堂'
+    }],
+    selectedId: '1',
+    productList: [],
+    lesson: {
+      list: [{
+        img: 'http://xinhuagolden.oss-cn-hzfinance.aliyuncs.com/image/mobile_img/banner/cdaac0d1-d888-47f3-8b96-64d864a4b717.png',
+        url: '/pages/lesson-detail/lesson-detail?url=http://h5.xinhuajindian.com/xhjd-h5/views/home/third-phase.html'
+      }, {
+        img: 'http://xinhuagolden.oss-cn-hzfinance.aliyuncs.com/image/mobile_img/notice/slt/34d757e4-bab3-486d-9177-badf4ca45a56.png',
+        url: '/pages/lesson-detail/lesson-detail?url=http://www.xinhuajindian.com/xhjd-h5/views/home/second-phase.html'
+      }, {
+        img: 'http://xinhuagolden.oss-cn-hzfinance.aliyuncs.com/image/mobile_img/notice/slt/61280bcd-af41-4016-a7f0-22adafd39f99.png',
+        url: '/pages/lesson-detail/lesson-detail?url=http://www.xinhuajindian.com/xhjd-h5/views/home/network-loan.html'
+      }]
+    }
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.getList();
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    this.Modal = this.selectComponent("#Modal");
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {},
+  tabChange: function (e) {
+    const { selectedId } = e.detail;
+    this.setData({
+      selectedId
+    });
+  },
+  getList: function () {
+    this.getManageProduct();
+    this.getManageLesson();
+  },
+  getManageProduct: function () {
+    getManageList().then(res => {
+      let list = res.data.productList;
+      const newList = [];
+      const otherList = [];
+      list.sort((a, b) => {
+        const aVal = a.displayBaseEarnings + a.displayExtraEarnings;
+        const bVal = b.displayBaseEarnings + b.displayExtraEarnings;
+        return bVal - aVal;
+      });
+      list.sort((a, b) => {
+        return b.productType - a.productType;
+      });
+      this.setData({
+        productList: this.data.productList.concat(list)
+      });
+    });
+  },
+  getManageLesson: function () {
+    getLessonList().then(res => {
+      const list = res.data.financialManagementClassInfoList;
+      const lessonList = [];
+      if (list.length > 0) {
+        list.forEach(item => {
+          lessonList.push({
+            img: item.imgUrl,
+            url: `/pages/lesson-detail/lesson-detail?url=${item.hdUrl}`
+          });
+        });
+        this.setData({
+          ['lesson.list']: lessonList
+        });
+      }
+    });
+  },
+  showModal: function () {
+    this.Modal.showModal();
+  },
+  cloceModal: function () {
+    this.Modal.hideModal();
+  }
+}, {
+  path: 'pages/manage/manage',
+  module: module,
+  exports: exports,
+  $app_require$: $app_require$,
+  wxs: typeof _$wxs$_ === 'undefined' ? {} : _$wxs$_
+});
+</script>
+  

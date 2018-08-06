@@ -1,0 +1,331 @@
+<import name="import-company-profile" src="./template/company-profile.ux"></import>
+<import name="import-develop-history" src="./template/develop-history.ux"></import>
+<import name="import-certification" src="./template/certification.ux"></import>
+<import name="import-about-contact" src="./template/about-contact.ux"></import>
+<import name="import-recruit" src="./template/recruit.ux"></import>
+<import name="tab" src="/components/tab/index.ux"></import>
+<template>
+<div class="u-w-view u-w-root">
+  <div class="u-w-view u-w-tabs">
+    <div class="u-w-view container aboutus">
+      <tab list="{{list}}" selectedid="{{selectedId}}" bind:tabchange="tabChange"></tab>
+      <div class="u-w-view top-bg">
+        <text class="u-w-text">“新华网 • 互联网经济”战略合作伙伴</text>
+      </div>
+      <import-company-profile is="company-profile" data="{{ baseUrl, selectedId }}"></import-company-profile>
+      <import-develop-history is="develop-history" data="{{ baseUrl, selectedId }}"></import-develop-history>
+      <import-certification is="certification" data="{{ baseUrl, selectedId }}"></import-certification>
+      <import-about-contact is="about-contact" data="{{ baseUrl, selectedId, map}}"></import-about-contact>
+      <import-recruit is="recruit" data="{{ baseUrl, selectedId }}"></import-recruit>
+    </div>
+    <div class="u-w-view u-w-tabbar-placeholder">
+      <div class="u-w-view u-w-tabbar u-w-tabbar-bottom" style="border-top-color:black;background-color:#ffffff">
+        <div class="u-w-view u-w-tabbar-item" onclick="$handleRouterEvent('switchTab')" data-url="pages/index/index">
+          <image class="u-w-tabbar-icon" src="/images/tabBar/homepage.png"></image>
+          <text class="u-w-tabbar-text" style="color:#aaaaaa">首页</text>
+        </div>
+        <div class="u-w-view u-w-tabbar-item" onclick="$handleRouterEvent('switchTab')" data-url="pages/manage/manage">
+          <image class="u-w-tabbar-icon" src="/images/tabBar/coupons.png"></image>
+          <text class="u-w-tabbar-text" style="color:#aaaaaa">理财</text>
+        </div>
+        <div class="u-w-view u-w-tabbar-item" onclick="$handleRouterEvent('switchTab')" data-url="pages/aboutus/aboutus">
+          <image class="u-w-tabbar-icon" src="/images/tabBar/group_fill.png"></image>
+          <text class="u-w-tabbar-text" style="color:#FF674C">关于我们</text>
+        </div>
+        <div class="u-w-view u-w-tabbar-item" onclick="$handleRouterEvent('switchTab')" data-url="pages/information/information">
+          <image class="u-w-tabbar-icon" src="/images/tabBar/barrage.png"></image>
+          <text class="u-w-tabbar-text" style="color:#aaaaaa">信息披露</text>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+<style>
+@import '../../polyfill.css';
+@import '../../app.css';
+
+@import '/common/css/layout.css';
+
+@import '/templates/QRcode/qr-code.css';
+
+.top-bg {
+  background-image: url('http://www.xinhuajindian.com/xhjd-web/static/images/aboutus_header.png');
+}
+
+.column .ceo-sign {
+  font-size: 35px;
+  color: #333;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.column .ceo-sign .sign {
+  width: 150px;
+  display: flex;
+  /*height:auto; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+.develop-history .time-line {
+  padding: 80px 50px 40px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  color: #666;
+}
+
+.develop-history .time-line .time-title {
+  font-size: 30px;
+  color: #fff;
+  width: 180px;
+  height: 75px;
+  line-height: 75px;
+  text-align: center;
+  background-color: #FF674C;
+  margin-bottom: 70px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  /*border-radius:10px; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+  /*position:relative; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+/*
+uniapp comment: unsupported selector.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)
+.develop-history .time-line .time-title::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50% , 100%);
+  width: 0;
+  height: 0;
+  border-left: 12rpx solid transparent;
+  border-right: 12rpx solid transparent;
+  border-top: 15rpx solid #FF674C;
+}
+*/
+
+/*
+uniapp comment: unsupported selector.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)
+.develop-history .time-line .time-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate3d(-50% , 100%, 0);
+  width: 0rpx;
+  border: 0.5px solid #FF674C;
+  height: 70rpx;
+  background: #FF674C;
+}
+*/
+
+.develop-history .time-line .incident {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-direction: row;
+}
+
+.develop-history .time-line .incident > text {
+  width: 50%;
+  padding-bottom: 80px;
+}
+
+/*
+uniapp comment: unsupported selector.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)
+.develop-history .time-line .incident > text:first-child {
+  text-align: right;
+}
+*/
+
+.develop-history .time-line .dot {
+  border: 1px solid #FF674C;
+  margin: 0 36px;
+  display: none;
+  background-color: #FF674C;
+  /*width:0px; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+  /*transform:translate3d(0, 0 ,0); uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+  /*background:#FF674C; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+  /*position:relative; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+/*
+uniapp comment: unsupported selector.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)
+.develop-history .time-line .dot::before {
+  content: '';
+  position: absolute;
+  top: 5rpx;
+  left: 50%;
+  transform: translate(-50% , 0);
+  width: 16rpx;
+  height: 16rpx;
+  background-color: #EF5C4C;
+  border: 8rpx solid #FEE2E2;
+  border-radius: 100%;
+}
+*/
+
+.certification .list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.certification .list > image {
+  width: 80%;
+  display: flex;
+  /*height:auto; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+.certification .list > text {
+  font-size: 30px;
+  color: #666;
+  margin-bottom: 50px;
+}
+
+.about-contact .map {
+  width: 100%;
+  height: 400px;
+}
+
+.about-contact .contact-information {
+  font-size: 30px;
+  line-height: 1.5;
+  color: #333;
+  padding: 50px 0;
+  border-bottom-width: 2px;
+  border-style: solid;
+  border-bottom-color: #e1e2e3;
+  /*border-bottom:2px solid #e1e2e3; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+.about-contact .contact-information .information-item {
+  margin-bottom: 30px;
+}
+
+.about-contact .contact-information .phone {
+  font-size: 50px;
+}
+
+.recruit .paragraph {
+  font-size: 32px;
+}
+
+.recruit .recruit-list {
+  padding: 20px 0;
+}
+
+.recruit .recruit-item {
+  margin-bottom: 80px;
+}
+
+.recruit .recruit-item .title {
+  font-size: 35px;
+  color: #FF674C;
+  font-weight: bold;
+  padding-bottom: 20px;
+  /*position:relative; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+
+/*
+uniapp comment: unsupported selector.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)
+.recruit .recruit-item .title::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 4rpx;
+  height: 4rpx;
+  width: 80rpx;
+  background-color: #FF674C;
+}
+*/
+
+.recruit .recruit-item .content {
+  font-size: 30px;
+  color: #666;
+}
+</style>
+<script>
+
+const _$wxs$_ = {
+
+}
+
+// pages/aboutus/aboutus.js
+const baseUrl = require('../../config').baseUrl;
+const { Image, extend } = require('../../common/js/common.js');
+
+Page(extend({}, Image, {
+  data: {
+    baseUrl,
+    list: [{
+      id: '1',
+      title: '关于我们'
+    }, {
+      id: '2',
+      title: '发展历程'
+    }, {
+      id: '3',
+      title: '资质认证'
+    }, {
+      id: '4',
+      title: '联系我们'
+    }, {
+      id: '5',
+      title: '人才招聘'
+    }],
+    selectedId: '1',
+    map: {
+      longitude: 120.0597989226,
+      latitude: 30.2881204532,
+      markers: [{
+        iconPath: '/images/logo/logo_map.png',
+        id: 0,
+        title: '新华金典',
+        latitude: 30.2881204532,
+        longitude: 120.0597989226,
+        width: 120,
+        height: 60
+      }]
+    },
+    companyProfile: {
+      previewImages: [`${baseUrl}/static/images/about_header_1.png`, `${baseUrl}/static/images/about_header_3.png`, `${baseUrl}/static/images/about_header_2.png`]
+    },
+    certification: {
+      previewImages: [`${baseUrl}/static/images/business.png`, `${baseUrl}/static/images/chinaNet.png`, `${baseUrl}/static/images/ios.png`, `${baseUrl}/static/images/android.png`, `${baseUrl}/static/images/permits.png`]
+    }
+  },
+  onLoad: function (options) {},
+  onReady: function () {},
+  tabChange: function (e) {
+    const { selectedId } = e.detail;
+    this.setData({
+      selectedId
+    });
+  },
+  callup: function () {
+    //uniapp comment: unsupported api.[兼容写法参考](http://ask.dcloud.net.cn/article/13168)
+    wx.makePhoneCall({
+      phoneNumber: '400-157-6800'
+    });
+  }
+}), {
+  path: 'pages/aboutus/aboutus',
+  module: module,
+  exports: exports,
+  $app_require$: $app_require$,
+  wxs: typeof _$wxs$_ === 'undefined' ? {} : _$wxs$_
+});
+</script>
+  

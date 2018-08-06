@@ -1,0 +1,94 @@
+<template>
+  <!-- template里只能有一个根节点 -->
+	<list class="class-list">
+			<block for="{{(index, item) in classList}}">
+					<list-item type="children" class="class-item" onclick="clickClass(item.hdUrl)">
+						<image src="{{item.imgUrl}}"></image>
+					</list-item>
+			</block>
+	</list>
+</template>
+
+<style>
+  .class-page {
+		width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+		font-size: 40px;
+  }
+	.class-list{
+		padding: 0 5px;
+	}
+	.class-item{
+		padding: 10px;
+	}
+	.class-item image{
+		width: 100%;
+	}
+  .title {
+    font-size: 40px;
+    text-align: center;
+  }
+</style>
+
+<script>
+	import { getClassList } from '../Common/api/class'
+	import webview from '@system.webview'
+  export default {
+    data: {
+			classList:  [
+      {
+        "imgUrl": "http://xinhuagolden.oss-cn-hzfinance.aliyuncs.com/image/mobile_img/notice/slt/bd57dbef-1e5b-4723-87a5-1229a3d3b6fb.png",
+        "titleName": "金典理财小课堂",
+        "hdUrl": "http://h5.xinhuajindian.com/xhjd-h5/views/home/xhjd-class.html?num=5"
+      },
+      {
+        "imgUrl": "http://xinhuagolden.oss-cn-hzfinance.aliyuncs.com/image/mobile_img/notice/slt/f7f2f470-8bfb-4368-84ed-7ba428eeeff7.png",
+        "titleName": "金典理财小课堂",
+        "hdUrl": "http://www.xinhuajindian.com/xhjd-h5/views/home/forth-phase.html"
+      },
+      {
+        "imgUrl": "http://xinhuagolden.oss-cn-hzfinance.aliyuncs.com/image/mobile_img/notice/slt/b443e464-8225-4c3d-a18d-0273df15a109.png",
+        "titleName": "金典理财小课堂",
+        "hdUrl": "http://h5.xinhuajindian.com/xhjd-h5/views/home/third-phase.html"
+      },
+      {
+        "imgUrl": "http://xinhuagolden.oss-cn-hzfinance.aliyuncs.com/image/mobile_img/notice/slt/34d757e4-bab3-486d-9177-badf4ca45a56.png",
+        "titleName": "金典理财小课堂",
+        "hdUrl": "http://www.xinhuajindian.com/xhjd-h5/views/home/second-phase.html"
+      },
+      {
+        "imgUrl": "http://xinhuagolden.oss-cn-hzfinance.aliyuncs.com/image/mobile_img/notice/slt/61280bcd-af41-4016-a7f0-22adafd39f99.png",
+        "titleName": "金典理财小课堂",
+        "hdUrl": "http://www.xinhuajindian.com/xhjd-h5/views/home/network-loan.html"
+      }
+    ]
+    },
+    /**
+     * 当用户点击菜单按钮时触发，调用app中定义的方法showMenu
+     * 注意：使用加载器测试`创建桌面快捷方式`功能时，请先在`系统设置`中打开`应用加载器`的`桌面快捷方式`权限
+     */
+    onMenuPress() {
+      this.$app.showMenu()
+    },
+		onInit () {
+			this.getClassList()
+    },
+		getClassList() {
+			var _this = this
+			getClassList().then((data) => {
+				if (data.financialManagementClassInfoList) {
+					_this.classList = data.financialManagementClassInfoList
+				}
+			}).catch((err) => {
+				console.log(err)
+			})
+		},
+		clickClass(url) {
+			webview.loadUrl({
+				url: url
+			})
+		}
+  }
+</script>

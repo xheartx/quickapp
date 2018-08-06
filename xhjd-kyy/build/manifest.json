@@ -1,0 +1,61 @@
+{
+  "package": "com.xhjd.quickqpp",
+  "name": "新华金典",
+  "versionName": "1.0.0",
+  "versionCode": "1",
+  "minPlatformVersion": "101",
+  "icon": "/Common/Image/ic_logo.png",
+  "features": [
+    {
+      "name": "system.prompt"
+    },
+    {
+      "name": "system.router"
+    },
+    {
+      "name": "system.shortcut"
+    },
+    {
+      "name": "system.fetch"
+    },
+    {
+      "name": "system.webview"
+    },
+    {
+      "name": "system.storage"
+    },
+    {
+      "name": "system.clipboard"
+    },
+    {
+      "name": "system.share"
+    }
+  ],
+  "permissions": [
+    {
+      "origin": "*"
+    }
+  ],
+  "config": {
+    "logLevel": "debug"
+  },
+  "router": {
+    "entry": "Home",
+    "pages": {
+      "Home": {
+        "component": "index"
+      }
+    }
+  },
+  "display": {
+    "titleBarBackgroundColor": "#ffffff",
+    "titleBarTextColor": "#414141",
+    "menu": true,
+    "pages": {
+      "Home": {
+        "titleBarText": "新华金典财富管理",
+        "menu": true
+      }
+    }
+  }
+}

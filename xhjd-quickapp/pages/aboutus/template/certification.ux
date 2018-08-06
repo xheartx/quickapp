@@ -1,0 +1,37 @@
+<template>
+<div class="u-w-view u-w-root">
+  <div class="u-w-view wrapper certification" if="{{selectedId === '3'}}">
+    <div class="u-w-view column">
+      <text class="u-w-text title">资质证书</text>
+      <div class="u-w-view list">
+        <image data-url="{{baseUrl}}/static/images/business.png" data-id="certification" class="u-w-image" src="{{baseUrl}}/static/images/business.png" style="resize-mode:cover" onclick="$handlePageEvent('previewImage',false,false)"></image>
+        <text class="u-w-text">营业执照</text>
+        <image data-url="{{baseUrl}}/static/images/chinaNet.png" data-id="certification" class="u-w-image" src="{{baseUrl}}/static/images/chinaNet.png" style="resize-mode:cover" onclick="$handlePageEvent('previewImage',false,false)"></image>
+        <text class="u-w-text">增值电信业务许可证</text>
+        <image data-url="{{baseUrl}}/static/images/ios.png" data-id="certification" class="u-w-image" src="{{baseUrl}}/static/images/ios.png" style="resize-mode:cover" onclick="$handlePageEvent('previewImage',false,false)"></image>
+        <text class="u-w-text">ios软件著作权证</text>
+        <image data-url="{{baseUrl}}/static/images/android.png" data-id="certification" class="u-w-image" src="{{baseUrl}}/static/images/android.png" style="resize-mode:cover" onclick="$handlePageEvent('previewImage',false,false)"></image>
+        <text class="u-w-text">Android软件著作权证</text>
+        <image data-url="{{baseUrl}}/static/images/permits.png" data-id="certification" class="u-w-image" src="{{baseUrl}}/static/images/permits.png" style="resize-mode:cover" onclick="$handlePageEvent('previewImage',false,false)"></image>
+        <text class="u-w-text">开户许可证</text>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+<style>
+@import '../../../polyfill.css';
+@import '../../../app.css';
+</style>
+<script>
+  export default {
+    props: ['data'],
+    onInit() {
+      
+      this.$handleRouterEvent = _$$handleRouterEvent$$_($app_require$)
+      
+      this.data&&Object.keys(this.data).forEach(key => this.$set(key, this.data[key]))
+    }
+  }
+</script>
+  

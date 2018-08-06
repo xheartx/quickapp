@@ -1,0 +1,65 @@
+
+<template>
+<div class="u-w-view u-w-root">
+  <div class="u-w-view runreports-detail">
+    <image data-url="{{imageBg}}" class="u-w-image" src="{{imageBg}}" style="resize-mode:cover" onclick="$handlePageEvent('previewImage',false,false)"></image>
+  </div>
+</div>
+</template>
+<style>
+@import '../../polyfill.css';
+@import '../../app.css';
+
+.runreports-detail {
+  width: 100%;
+  font-size: 0;
+}
+
+.runreports-detail > image {
+  width: 100%;
+  display: flex;
+  /*height:auto; uniapp comment: unsupported style.[兼容写法参考](http://ask.dcloud.net.cn/article/13170)*/
+}
+</style>
+<script>
+
+const _$wxs$_ = {
+
+}
+
+// pages/runreports-detail.js
+const baseUrl = require('../../config').baseUrl;
+const { Image, extend } = require('../../common/js/common.js');
+
+Page(extend({}, Image, {
+  data: {
+    baseUrl,
+    id: '',
+    imageBg: ''
+  },
+  onLoad: function (options) {
+    //uniapp comment: unsupported api.[兼容写法参考](http://ask.dcloud.net.cn/article/13168)
+    wx.showLoading({
+      title: '加载中'
+    });
+    const id = options.id;
+    this.setData({
+      id
+    });
+  },
+  onReady: function () {
+    this.setData({
+      imageBg: `${baseUrl}/static/images/month_report${this.data.id}.png`
+    });
+    //uniapp comment: unsupported api.[兼容写法参考](http://ask.dcloud.net.cn/article/13168)
+    wx.hideLoading();
+  }
+}), {
+  path: 'pages/runreports-detail/runreports-detail',
+  module: module,
+  exports: exports,
+  $app_require$: $app_require$,
+  wxs: typeof _$wxs$_ === 'undefined' ? {} : _$wxs$_
+});
+</script>
+  

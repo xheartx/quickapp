@@ -1,0 +1,81 @@
+<template>
+<div class="u-w-view u-w-root">
+  <div class="u-w-view wrapper develop-history" if="{{selectedId === '2'}}">
+    <div class="u-w-view column">
+      <text class="u-w-text title">发展历程</text>
+      <div class="u-w-view time-line">
+        <div class="u-w-view time-title">
+          <text class="u-w-text">2017</text>
+        </div>
+        <div class="u-w-view incident">
+          <text class="u-w-text">2017年10月</text>
+          <div class="u-w-view dot"></div>
+          <text class="u-w-text">获得ICP许可证</text>
+        </div>
+        <div class="u-w-view incident">
+          <text class="u-w-text">人民日报社三级子公司中金国信（杭州） 实业有限公司入股 ，股份占比67.65%</text>
+          <div class="u-w-view dot"></div>
+          <text class="u-w-text">2017年10月</text>
+        </div>
+        <div class="u-w-view incident">
+          <text class="u-w-text">2017年9月</text>
+          <div class="u-w-view dot"></div>
+          <text class="u-w-text">作为“新华网•互联网经济”战略合作伙伴和分论坛主办方之一参加2017年中国国际商标品牌节</text>
+        </div>
+        <div class="u-w-view incident">
+          <text class="u-w-text">上线第三方支付--宝付支付</text>
+          <div class="u-w-view dot"></div>
+          <text class="u-w-text">2017年8月</text>
+        </div>
+        <div class="u-w-view incident">
+          <text class="u-w-text">2017年8月</text>
+          <div class="u-w-view dot"></div>
+          <text class="u-w-text">获得软件著作权证</text>
+        </div>
+        <div class="u-w-view time-title">
+          <text class="u-w-text">2016</text>
+        </div>
+        <div class="u-w-view incident">
+          <text class="u-w-text">“新华金典”获得国家注册商标</text>
+          <div class="u-w-view dot"></div>
+          <text class="u-w-text">2016年10月</text>
+        </div>
+        <div class="u-w-view time-title">
+          <text class="u-w-text">2015</text>
+        </div>
+        <div class="u-w-view incident">
+          <text class="u-w-text">2015年8月</text>
+          <div class="u-w-view dot"></div>
+          <text class="u-w-text">作为承办方参加新华网浙江分公司主办的 《互联网金融风险防控“+”之道》主题论坛</text>
+        </div>
+        <div class="u-w-view incident">
+          <text class="u-w-text">新华金典理财APP上线</text>
+          <div class="u-w-view dot"></div>
+          <text class="u-w-text">2015年6月</text>
+        </div>
+        <div class="u-w-view incident">
+          <text class="u-w-text">2015年5月</text>
+          <div class="u-w-view dot"></div>
+          <text class="u-w-text">新华金典财富管理股份有限公司成立</text>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+<style>
+@import '../../../polyfill.css';
+@import '../../../app.css';
+</style>
+<script>
+  export default {
+    props: ['data'],
+    onInit() {
+      
+      this.$handleRouterEvent = _$$handleRouterEvent$$_($app_require$)
+      
+      this.data&&Object.keys(this.data).forEach(key => this.$set(key, this.data[key]))
+    }
+  }
+</script>
+  

@@ -1,0 +1,171 @@
+<template>
+<div class="u-w-view u-w-root">
+  <div class="u-w-view wrapper manage-product" if="{{selectedId === '1'}}">
+    <div class="u-w-view title-wrapper">
+      <div class="u-w-view title">
+        <text class="u-w-text">新手福利</text>
+      </div>
+      <div class="u-w-view sub-title">
+        <text class="u-w-text">理财零门槛，手把手教您钱生钱</text>
+      </div>
+    </div>
+    <div class="u-w-view new-welfare">
+      <div class="u-w-view welfare-item">
+        <div class="u-w-view welfare-title">
+          <text class="u-w-text">新手专享标</text>
+        </div>
+        <div class="u-w-view line"></div>
+        <div class="u-w-view welfare-content">
+          <div class="u-w-view number">
+            <text class="u-w-text">15%</text>
+          </div>
+          <div class="u-w-view explain">
+            <text class="u-w-text">年化收益率</text>
+          </div>
+          <div class="u-w-view des">
+            <text class="u-w-text">1000元起投 | 15天短期高息</text>
+          </div>
+        </div>
+      </div>
+      <div class="u-w-view welfare-item">
+        <div class="u-w-view welfare-title">
+          <text class="u-w-text">注册领取9999元理财券</text>
+        </div>
+        <div class="u-w-view line"></div>
+        <div class="u-w-view welfare-content">
+          <div class="u-w-view qr-image">
+            <image class="u-w-image" src="{{baseUrl}}/static/images/xhjd.png" style="resize-mode:cover"></image>
+            <text class="u-w-text right">扫\n码\n注\n册\n领\n取</text>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="u-w-view title-wrapper">
+      <div class="u-w-view title">
+        <text class="u-w-text">多款产品，灵活方便</text>
+      </div>
+    </div>
+    <div class="u-w-view product-list">
+      <block for="{{(index,item) in productList}}" tid="{{item.id}}">
+        <div class="u-w-view product-item">
+          <div class="u-w-view header">
+            <text class="u-w-text">{{item.title}}</text>
+            <text class="u-w-text embellish" if="{{item.productType === 1}}">限购一次</text>
+          </div>
+          <div class="u-w-view content">
+            <div class="u-w-view data-wrapper">
+              <div class="u-w-view data-item">
+                <div class="u-w-view description">
+                  <text class="u-w-text">{{(item.productType === 1 ? '超高年化收益率' : '预期年化收益率')}}</text>
+                </div>
+                <div class="u-w-view num">
+                  <text class="u-w-text">{{item.displayBaseEarnings + item.displayExtraEarnings}}%</text>
+                </div>
+              </div>
+              <div class="u-w-view data-item">
+                <div class="u-w-view description">
+                  <text class="u-w-text">超短理财期限</text>
+                </div>
+                <div class="u-w-view num">
+                  <text class="u-w-text">天</text>
+                  <text class="u-w-text">{{item.lcqx}}</text>
+                </div>
+              </div>
+              <div class="u-w-view data-item">
+                <div class="u-w-view description">
+                  <text class="u-w-text">起投金额</text>
+                </div>
+                <div class="u-w-view num">
+                  <text class="u-w-text">元</text>
+                  <text class="u-w-text">{{(item.atleastMoney / 100)}}</text>
+                </div>
+              </div>
+            </div>
+            <div class="u-w-view invest-btn" onclick="$handlePageEvent('showModal',false,false)">
+              <text class="u-w-text">立即投资</text>
+            </div>
+          </div>
+        </div>
+      </block>
+      <div class="u-w-view null-product" if="{{productList.length <= 0}}">
+        <text class="u-w-text">暂无产品</text>
+      </div>
+    </div>
+    <div class="u-w-view title-wrapper">
+      <div class="u-w-view title">
+        <text class="u-w-text">仅需3步，轻松理财</text>
+      </div>
+    </div>
+    <div class="u-w-view step-wrapper">
+      <div class="u-w-view step-item">
+        <div class="u-w-view num">
+          <text class="u-w-text">01</text>
+        </div>
+        <div class="u-w-view text">
+          <text class="u-w-text">扫描下载APP</text>
+        </div>
+        <div class="u-w-view img">
+          <image class="u-w-image" src="{{baseUrl}}/static/images/download.png" style="resize-mode:cover"></image>
+        </div>
+        <div class="u-w-view des">
+          <text class="u-w-text">苹果、安卓手机都适用</text>
+        </div>
+      </div>
+      <div class="u-w-view step-item">
+        <div class="u-w-view num">
+          <text class="u-w-text">02</text>
+        </div>
+        <div class="u-w-view text">
+          <text class="u-w-text">注册账户</text>
+        </div>
+        <div class="u-w-view img">
+          <image style="width:70%;resize-mode:cover" class="u-w-image" src="{{baseUrl}}/static/images/mobile1.png"></image>
+        </div>
+        <div class="u-w-view des">
+          <text class="u-w-text">我的」-点击「注册送红包」</text>
+        </div>
+      </div>
+      <div class="u-w-view step-item">
+        <div class="u-w-view num">
+          <text class="u-w-text">03</text>
+        </div>
+        <div class="u-w-view text">
+          <text class="u-w-text">绑卡认证理财</text>
+        </div>
+        <div class="u-w-view img">
+          <image class="u-w-image" src="{{baseUrl}}/static/images/mobile2.png" style="resize-mode:cover"></image>
+        </div>
+        <div class="u-w-view des">
+          <text class="u-w-text">点击「立即投资」绑定银行卡</text>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="Modal" class="u-w-modal">
+    <div class="u-w-view modal-body">
+      <div class="u-w-view modal-image">
+        <div class="u-w-view modal-close" onclick="$handlePageEvent('cloceModal',false,false)">
+          <text class="u-w-text">×</text>
+        </div>
+        <image class="u-w-image" src="{{baseUrl}}/static/images/QR_img.png" style="resize-mode:cover"></image>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+<style>
+@import '../../../polyfill.css';
+@import '../../../app.css';
+</style>
+<script>
+  export default {
+    props: ['data'],
+    onInit() {
+      
+      this.$handleRouterEvent = _$$handleRouterEvent$$_($app_require$)
+      
+      this.data&&Object.keys(this.data).forEach(key => this.$set(key, this.data[key]))
+    }
+  }
+</script>
+  

@@ -1,0 +1,21 @@
+<template>
+    <web src="{{ url }}" id="web"></web>
+</template>
+
+<script>
+  export default {
+    data: {
+      title: '新华金典',
+      url: 'http://www.xinhuajindian.com/xhjd-web/'
+    },
+    onInit () {
+      // this.$page.setTitleBar({ text: this.title })
+    }
+  }
+</script>
+<style>
+#web{
+	width: 100%;
+	height: 100%;
+}	
+</style>
